@@ -1,16 +1,15 @@
+import 'package:cubit_state_manager/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:thedios/providers/note_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'cubits/note_cubit.dart';
 import 'pages/notes_page.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => NoteProvider()),
-      ],
-      child: const MyApp(),
-    ),
+      BlocProvider(
+        create: (_) => NoteCubit(ApiService()),
+        child: const MyApp(),
+      ),
   );
 }
 
