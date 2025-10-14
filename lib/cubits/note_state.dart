@@ -1,6 +1,8 @@
 import '../../models/note.dart';
 
-abstract class NoteState {}
+abstract class NoteState {}//
+
+// equitable
 
 class NoteInitial extends NoteState {}
 

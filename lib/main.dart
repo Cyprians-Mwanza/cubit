@@ -6,12 +6,17 @@ import 'pages/notes_page.dart';
 
 void main() {
   runApp(
-      BlocProvider(
-        create: (_) => NoteCubit(ApiService()),
-        child: const MyApp(),
-      ),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => NoteCubit(ApiService()),
+        ),
+      ],
+      child: const MyApp(),
+    ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Notes App (Provider + Dio)',
+      title: 'Notes App (Cubit + Dio)',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
