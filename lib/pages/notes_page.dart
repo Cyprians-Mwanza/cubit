@@ -25,25 +25,20 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Notes')),
-      body: BlocBuilder<NoteCubit, NoteState>(
+      body: BlocConsumer<NoteCubit, NoteState>(
+        listener: (context, state) {
+          if (state is NoteError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           if (state is NoteLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is NoteError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(state.message, style: const TextStyle(color: Colors.red)),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () =>
-                        context.read<NoteCubit>().fetchNoteById(noteIdToDisplay),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            );
           } else if (state is NoteLoaded) {
             final note = state.note;
             return Center(
@@ -89,6 +84,14 @@ class _NotesPageState extends State<NotesPage> {
                     ),
                   ],
                 ),
+              ),
+            );
+          } else if (state is NoteError) {
+            return Center(
+              child: ElevatedButton(
+                onPressed: () =>
+                    context.read<NoteCubit>().fetchNoteById(noteIdToDisplay),
+                child: const Text('Retry'),
               ),
             );
           } else {
