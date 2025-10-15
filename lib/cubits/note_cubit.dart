@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/note.dart';
-import '../../services/api_service.dart';
+import '../models/note.dart';
+import '../services/api_service.dart';
 import 'note_state.dart';
 
 class NoteCubit extends Cubit<NoteState> {

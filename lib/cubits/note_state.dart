@@ -1,4 +1,4 @@
-import '../../models/note.dart';
+import '../models/note.dart';
 
 abstract class NoteState {}//
 
