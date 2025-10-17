@@ -9,6 +9,11 @@ class DatabaseHelper {
   DatabaseHelper._internal();
 
   static Database? _database;
+  // secure storage
+  // share preference
+  // hive //
+  // Riverpod
+  // cubit, retrofit, hive, authentication
 
   // Lazily get the database instance
   Future<Database> get database async {
