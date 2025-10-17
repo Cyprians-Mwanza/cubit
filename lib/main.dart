@@ -1,4 +1,3 @@
-import 'package:cubit_state_manager/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubits/note_cubit.dart';
@@ -8,15 +7,12 @@ void main() {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => NoteCubit(ApiService()),
-        ),
+        BlocProvider(create: (_) => NoteCubit()),
       ],
       child: const MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -24,10 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Notes App (Cubit + Dio)',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Notes App (SQLite + Bloc)',
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const NotesPage(),
       debugShowCheckedModeBanner: false,
     );
